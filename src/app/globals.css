@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-brand-charcoal bg-white font-sans antialiased;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold text-brand-charcoal;
+    font-family: "Open Sans", "Kamerik 105", Helvetica, Arial, sans-serif;
+  }
+
+  h1 {
+    font-size: 2.25rem;
+    line-height: 1.2;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-size: 1.35rem;
+    line-height: 1.4;
+  }
+
+  h4 {
+    font-size: 1.15rem;
+    line-height: 1.4;
+  }
+}
+
+/* Original rPeptide Specific Styles */
+.before-palace-order {
+  background: #ddac40;
+  padding: 10px 15px;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.before-palace-order p {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.blue-stak {
+  background-color: #28479e;
+  color: #ffffff;
+}
+
+.blue-stak h2, .blue-stak h3, .blue-stak p {
+  color: #ffffff;
+}
+
+.alt-stak {
+  background-color: #f2f1f1;
+}
+
+.sequence {
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+  background-color: #f8f9fa;
+  border: 1px solid #d2daf3;
+  padding: 10px 14px;
+  border-radius: 4px;
+  letter-spacing: 0.12em;
+  word-break: break-all;
+  font-size: 0.9em;
+}
+
+/* Custom Buttons matching Foundation rPeptide theme */
+.btn-primary {
+  @apply bg-brand-blue hover:bg-brand-blue-hover text-white font-semibold py-2.5 px-6 rounded-none transition-colors inline-block text-center cursor-pointer;
+}
+
+.btn-gold {
+  @apply bg-brand-gold hover:bg-brand-gold-hover text-white font-semibold py-2.5 px-6 rounded-none transition-colors inline-block text-center cursor-pointer;
+}
+
+.btn-hollow {
+  @apply border border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white font-semibold py-2 px-5 rounded-none transition-colors inline-block text-center cursor-pointer;
+}
+
+/* Product Card List Styling */
+.product-card {
+  @apply bg-white border border-gray-200 transition-all hover:shadow-md flex flex-col justify-between p-4 text-center h-full;
+}
+
+/* Swatches */
+.swatch-btn {
+  @apply border border-gray-300 py-1 px-3 text-sm font-medium hover:border-brand-blue cursor-pointer transition-colors;
+}
+
+.swatch-btn.active {
+  @apply border-brand-blue bg-brand-blue text-white;
+}
+
+/* Container */
+.site-container {
+  max-width: 75rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}

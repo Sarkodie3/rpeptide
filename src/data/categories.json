@@ -1,0 +1,387 @@
+[
+  {
+    "id": 120,
+    "name": "COVID-19/ Sars-Cov-2 Related Kits",
+    "slug": "covid-19-sars-cov-2-related-kits",
+    "parent": 117,
+    "count": 6
+  },
+  {
+    "id": 106,
+    "name": "Synuclein Labeled",
+    "slug": "synuclein-labeled",
+    "parent": 41,
+    "count": 5
+  },
+  {
+    "id": 107,
+    "name": "Synuclein Mutants",
+    "slug": "synuclein-mutants",
+    "parent": 41,
+    "count": 7
+  },
+  {
+    "id": 108,
+    "name": "Synuclein Antibodies",
+    "slug": "synuclein-antibodies-synuclein",
+    "parent": 41,
+    "count": 0
+  },
+  {
+    "id": 109,
+    "name": "Synuclein Preformed Fibrils",
+    "slug": "synuclein-preformed-fibrils",
+    "parent": 41,
+    "count": 0
+  },
+  {
+    "id": 110,
+    "name": "Tau Wild Type",
+    "slug": "tau-wild-type",
+    "parent": 40,
+    "count": 7
+  },
+  {
+    "id": 111,
+    "name": "Tau Fragments",
+    "slug": "tau-fragments",
+    "parent": 40,
+    "count": 4
+  },
+  {
+    "id": 112,
+    "name": "Tau Labeled",
+    "slug": "tau-labeled",
+    "parent": 40,
+    "count": 5
+  },
+  {
+    "id": 114,
+    "name": "Tau Antibodies",
+    "slug": "tau-antibodies-tau",
+    "parent": 40,
+    "count": 0
+  },
+  {
+    "id": 115,
+    "name": "Tau Preformed Fibrils",
+    "slug": "tau-preformed-fibrils",
+    "parent": 40,
+    "count": 0
+  },
+  {
+    "id": 116,
+    "name": "Neurodegenerative Related Compounds",
+    "slug": "neurodegenerative-related-compounds",
+    "parent": 0,
+    "count": 38
+  },
+  {
+    "id": 117,
+    "name": "Coronavirus Research Tools",
+    "slug": "coronavirus-research-tools",
+    "parent": 0,
+    "count": 119
+  },
+  {
+    "id": 118,
+    "name": "COVID-19/ Sars-Cov-2 Related Antibodies",
+    "slug": "covid-19-sars-cov-2-related-antibodies",
+    "parent": 117,
+    "count": 20
+  },
+  {
+    "id": 119,
+    "name": "COVID-19/ Sars-Cov-2 Related Compounds",
+    "slug": "covid-19-sars-cov-2-related-compounds",
+    "parent": 117,
+    "count": 50
+  },
+  {
+    "id": 105,
+    "name": "Synuclein Fragments",
+    "slug": "synuclein-fragments",
+    "parent": 41,
+    "count": 6
+  },
+  {
+    "id": 121,
+    "name": "COVID-19/ Sars-Cov-2 Related Proteins",
+    "slug": "covid-19-sars-cov-2-related-proteins",
+    "parent": 117,
+    "count": 43
+  },
+  {
+    "id": 122,
+    "name": "Kits",
+    "slug": "kits",
+    "parent": 0,
+    "count": 9
+  },
+  {
+    "id": 123,
+    "name": "Beta-Amyloid",
+    "slug": "beta-amyloid-kits",
+    "parent": 122,
+    "count": 8
+  },
+  {
+    "id": 124,
+    "name": "Tau",
+    "slug": "tau-kits",
+    "parent": 122,
+    "count": 1
+  },
+  {
+    "id": 125,
+    "name": "Preformed Fibrils",
+    "slug": "preformed-fibrils",
+    "parent": 0,
+    "count": 8
+  },
+  {
+    "id": 126,
+    "name": "Beta-Amyloid Preformed Fibrils",
+    "slug": "beta-amyloid-preformed-fibrils-preformed-fibrils",
+    "parent": 125,
+    "count": 2
+  },
+  {
+    "id": 127,
+    "name": "Synuclein Preformed Fibrils",
+    "slug": "synuclein-preformed-fibrils-preformed-fibrils",
+    "parent": 125,
+    "count": 3
+  },
+  {
+    "id": 128,
+    "name": "Tau Preformed Fibrils",
+    "slug": "tau-preformed-fibrils-preformed-fibrils",
+    "parent": 125,
+    "count": 2
+  },
+  {
+    "id": 129,
+    "name": "Amylin Preformed Fibrils",
+    "slug": "amylin-preformed-fibrils",
+    "parent": 125,
+    "count": 0
+  },
+  {
+    "id": 130,
+    "name": "Preformed Fibrils Complexes",
+    "slug": "preformed-fibrils-complexes",
+    "parent": 125,
+    "count": 1
+  },
+  {
+    "id": 132,
+    "name": "Beta-Amyloid Antibodies",
+    "slug": "beta-amyloid-antibodies",
+    "parent": 84,
+    "count": 5
+  },
+  {
+    "id": 133,
+    "name": "Beta-Amyloid Mutant",
+    "slug": "beta-amyloid-mutant",
+    "parent": 94,
+    "count": 12
+  },
+  {
+    "id": 138,
+    "name": "Tau Mutations",
+    "slug": "tau-mutations",
+    "parent": 40,
+    "count": 8
+  },
+  {
+    "id": 91,
+    "name": "Amylin Labeled",
+    "slug": "amylin-labeled",
+    "parent": 89,
+    "count": 0
+  },
+  {
+    "id": 31,
+    "name": "Proteins",
+    "slug": "proteins",
+    "parent": 0,
+    "count": 72
+  },
+  {
+    "id": 40,
+    "name": "Tau",
+    "slug": "tau",
+    "parent": 31,
+    "count": 21
+  },
+  {
+    "id": 41,
+    "name": "Synuclein",
+    "slug": "synuclein",
+    "parent": 31,
+    "count": 28
+  },
+  {
+    "id": 54,
+    "name": "Calmodulin",
+    "slug": "calmodulin",
+    "parent": 31,
+    "count": 3
+  },
+  {
+    "id": 56,
+    "name": "Chemokine",
+    "slug": "chemokine",
+    "parent": 31,
+    "count": 1
+  },
+  {
+    "id": 57,
+    "name": "Surfactants",
+    "slug": "surfactants",
+    "parent": 31,
+    "count": 1
+  },
+  {
+    "id": 59,
+    "name": "Tubulin",
+    "slug": "tubulin",
+    "parent": 31,
+    "count": 1
+  },
+  {
+    "id": 84,
+    "name": "Antibodies",
+    "slug": "antibodies",
+    "parent": 0,
+    "count": 50
+  },
+  {
+    "id": 86,
+    "name": "Synuclein",
+    "slug": "synuclein-antibodies",
+    "parent": 84,
+    "count": 8
+  },
+  {
+    "id": 87,
+    "name": "Tau",
+    "slug": "tau-antibodies",
+    "parent": 84,
+    "count": 37
+  },
+  {
+    "id": 88,
+    "name": "Peptides",
+    "slug": "peptides",
+    "parent": 0,
+    "count": 76
+  },
+  {
+    "id": 89,
+    "name": "Amylin",
+    "slug": "amylin",
+    "parent": 88,
+    "count": 0
+  },
+  {
+    "id": 90,
+    "name": "Amylin Native",
+    "slug": "amylin-native",
+    "parent": 89,
+    "count": 0
+  },
+  {
+    "id": 19,
+    "name": "Uncategorized",
+    "slug": "uncategorized",
+    "parent": 0,
+    "count": 0
+  },
+  {
+    "id": 92,
+    "name": "Amyloid Precursor Protein Related Peptide",
+    "slug": "amyloid-precursor-protein-related-peptide",
+    "parent": 88,
+    "count": 6
+  },
+  {
+    "id": 93,
+    "name": "Amyloid Precursor Protein Related Peptide Labeled",
+    "slug": "amyloid-precursor-protein-related-peptide-labeled",
+    "parent": 92,
+    "count": 0
+  },
+  {
+    "id": 94,
+    "name": "Beta-Amyloid",
+    "slug": "beta-amyloid",
+    "parent": 88,
+    "count": 70
+  },
+  {
+    "id": 95,
+    "name": "Beta-Amyloid Native",
+    "slug": "beta-amyloid-native",
+    "parent": 94,
+    "count": 18
+  },
+  {
+    "id": 96,
+    "name": "Beta-Amyloid Fragments",
+    "slug": "beta-amyloid-fragments",
+    "parent": 94,
+    "count": 5
+  },
+  {
+    "id": 97,
+    "name": "Beta-Amyloid Labeled",
+    "slug": "beta-amyloid-labeled",
+    "parent": 94,
+    "count": 19
+  },
+  {
+    "id": 99,
+    "name": "Beta-Amyloid Synthetic",
+    "slug": "beta-amyloid-synthetic",
+    "parent": 94,
+    "count": 15
+  },
+  {
+    "id": 100,
+    "name": "Beta-Amyloid Antibodies",
+    "slug": "beta-amyloid-antibodies-peptides",
+    "parent": 94,
+    "count": 0
+  },
+  {
+    "id": 101,
+    "name": "Beta-Amyloid Preformed Fibrils",
+    "slug": "beta-amyloid-preformed-fibrils",
+    "parent": 94,
+    "count": 0
+  },
+  {
+    "id": 102,
+    "name": "Apolipoprotein",
+    "slug": "apolipoprotein",
+    "parent": 31,
+    "count": 8
+  },
+  {
+    "id": 103,
+    "name": "Human Plasma Proteins",
+    "slug": "human-plasma-proteins",
+    "parent": 31,
+    "count": 9
+  },
+  {
+    "id": 104,
+    "name": "Synuclein Wild Type",
+    "slug": "synuclein-wild-type",
+    "parent": 41,
+    "count": 9
+  }
+]

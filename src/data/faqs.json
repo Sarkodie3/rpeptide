@@ -1,0 +1,234 @@
+[
+  {
+    "category": "General",
+    "id": "general",
+    "items": [
+      {
+        "question": "Can we receive discounts on rPeptide products?",
+        "answer": "<p>You may be eligible for a discount when placing a bulk order. Please contact us to request a quotation before placing your order.</p>"
+      },
+      {
+        "question": "Can you label a purified peptide that I provide?",
+        "answer": "<p>Unfortunately, we cannot isotopically label purified proteins that you provide. Isotope labeling of the protein has to occur as the protein is being produced, when we supply it with an N15 nitrogen source or C13 carbon source. If you would be interested in having us add an FITC label or dye, please contact us about our custom services.</p>"
+      },
+      {
+        "question": "Can I achieve batch-to-batch consistency of physical and chemical properties?",
+        "answer": "<p>All of our recombinant products have batch to batch consistency in their physical and chemical properties.</p>"
+      },
+      {
+        "question": "How can I find publications which have used rPeptide's products?",
+        "answer": "<p>You may find articles that were published using rPeptide’s products under the Publications tab. These are listed by product, then by year.</p>"
+      },
+      {
+        "question": "How can your products be used?",
+        "answer": "<p>Exact experimental usage may depend on the individual products. Please see the FAQs for the product you are interested in. Our products are not for human use, they are for research purposes only.</p>"
+      },
+      {
+        "question": "How can I receive pricing or information on a contract research product?",
+        "answer": "<p>You may email the quantity, purity and sequence you would like to sales@rpeptide.com.</p>"
+      },
+      {
+        "question": "What if I cannot find the answer to my question online?",
+        "answer": "<p>Please feel free to email us at sales@rpeptide.com for other inquires.</p>"
+      },
+      {
+        "question": "Why does solubility vary from product to product?",
+        "answer": "<p>The key factor that determines the solubility of our products is the amino acid sequence of each one. In the preparation of our products, we analyze the amino acid sequences and prepare our products in buffers that they solubilize in readily.</p>"
+      },
+      {
+        "question": "Why must some products ship on dry ice?",
+        "answer": "<p>Some products must be stored at -70°C and -80°C and therefore cannot ship at room temperature. To maintain the integrity of the product, it will ship on dry ice. Additional charges will apply for dry ice shipments.</p>"
+      },
+      {
+        "question": "Do any of your products contain tags or other modifications?",
+        "answer": "<p>None of rPeptide’s products are supplied to our customers with a tag on it unless otherwise stated on the datasheet or specifically requested on a custom basis.</p>"
+      },
+      {
+        "question": "What if I have a question that is not answered by the FAQs or information on rPeptide's website?",
+        "answer": "<p>Please feel free to email your questions to sales@rpeptide.com for all technical questions or other inquiries.</p>"
+      }
+    ]
+  },
+  {
+    "category": "Ordering",
+    "id": "ordering",
+    "items": [
+      {
+        "question": "How can I place an order?",
+        "answer": "<p>Orders can be placed online <a href=\"http://www.rpeptide.com/ordering.php\">here</a>. <br />\nYou can also place your order by emailing <a href=\"mailto:sales@rpeptide.com\">sales@rpeptide.com</a> or call and place the order by phone (678-753-0747).</p>\n<p>The following information will be needed when you place your order:</p>\n<p>Company, University, or Institute Name, Contact Person’s Name (Attn: to) Phone Number, E-mail Address, Purchase Order Number or Credit Card Number, Ship To Address, Bill To Address, VAT Number if needed. Please include quotation numbers on your purchase order.</p>"
+      },
+      {
+        "question": "How do you ship products?",
+        "answer": "<p>Domestic orders are shipped FedEx Standard Overnight. International orders ship using FedEx International Priority.</p>"
+      },
+      {
+        "question": "How long does it take to receive the products?",
+        "answer": "<div class=\"product-faq-row\">\n<div class=\"product-faq-answer\">Domestic orders are shipped FedEx Standard Overnight. International orders ship using FedEx International Priority. A tracking number will be provided to you so that you may monitor your package."
+      },
+      {
+        "question": "What is the cost of shipping on dry ice or blue ice?",
+        "answer": "<p>In addition to regular shipping charges, dry ice and blue ice charges are $30 for Domestic orders, and $75 for International.</p>"
+      },
+      {
+        "question": "What is the cost of shipping?",
+        "answer": "<p>Domestic orders are shipped FedEx Standard Overnight for $45. International orders (including Canada) ship using FedEx International Priority for $85. Additional charges may apply if dry ice or blue ice is required.</p>"
+      },
+      {
+        "question": "What is rPeptide’s return policy?",
+        "answer": "<p>Customer will notify rPeptide in writing of any claims for damages, defects, or shortages as soon as possible. If rPeptide is not notified within 3 business days of receipt, the products will be deemed acceptable to the customer. Any return needs a written authorization from rPeptide. All returns are subject to a 25% restocking charge plus shipping and handling fees.</p>"
+      }
+    ]
+  },
+  {
+    "category": "Beta-Amyloids",
+    "id": "beta-amyloids",
+    "items": [
+      {
+        "question": "How can your beta-amyloids be used?",
+        "answer": "<p>Our beta-amyloid peptides are suitable for various in vitro and in vivo experiments including: seeding studies, assay development, aggregation studies, cell-based experiments, and many more. Our products are not for human use, they are for research purposes only.</p>"
+      },
+      {
+        "question": "How pure are your recombinant beta-amyloid peptides?",
+        "answer": "<p>The purity of our recombinant beta-amyloid peptides is consistently &gt;97%. Purity is determined by the ratio of the beta-amyloid peak area against the total peak area of all the peaks combined on analytical HPLC.</p>"
+      },
+      {
+        "question": "What are the storage conditions of your recombinant peptides?",
+        "answer": "<p>Prior to reconstitution, products may be stored for up to 2-3 years between -20 and -80°C. After reconstitution in ammonium hydroxide, it is best to make working aliquots (AVOID FREEZE THAW) and store at -70°C and -80°C. This should be stable for about 1-2 weeks. For longer term, lyophilize aliquots.</p>"
+      },
+      {
+        "question": "What does HFIP stand for? Why do I see no lyophilized powder in my HFIP beta-amyloid?",
+        "answer": "<p>HFIP is Hexafluoroisopropanol. The HFIP treatment process desalts the peptide and is dried, leaving the peptide as a clear film around the bottom of the vial. This film is nearly invisible and may be difficult to see.</p>"
+      },
+      {
+        "question": "What is the solubility of your beta-amyloid peptides?",
+        "answer": "<p>Our beta-amyloid peptides are soluble in 1% ammonium hydroxide. We recommend reconstituting the peptide in this solution at a concentration of .1mg/ml to 1mg/ml. Afterward, a brief sonication and centrifugation step is also recommended to ensure full reconstitution.</p>"
+      },
+      {
+        "question": "When you state .5mg of peptide is within the vial, how is this calculated? When I measure the absorbance at 280nm and calculate the amount or weigh it on my balance the quantity is off.",
+        "answer": "<p>The peptide amount is calibrated chromatographically against known amounts of the product as determined by amino acid analysis. In our experience absorption at 280 nm is extremely low and hence we do not check either the purity or quantitate at 280nm. We also do not recommend weighing any of our products to measure quantity.</p>"
+      },
+      {
+        "question": "Why do you offer so many counter-ions of beta-amyloid? What are the differences between all of these, so I know what to choose for my experiments?",
+        "answer": "<p>The various salts/counter-ions our beta-amyloid peptides are supplied as are typically used in different types of experiments depending on our customers’ needs. The HFIP provides a highly monomeric starting material, however it may be toxic to living tissues unless properly diluted. The TFA also supplies a monomeric starting material but comes as a lyophilized powder whereas HFIP is a dried film. Both HCl and NaOH salts are lyophilized in an acidic and basic environment respectively and may be in a form that many consider more physiologically relevant than HFIP or TFA. The NH4OH counter-ion is provided as a highly monomeric starting material, considered physiologically relevant, is safe for cell-based experiments, and was lyophilized in a more basic environment. If a customer is unsure of which counter-ion to use in their experiments, we may recommend trying the starter kits, which contain one of each counter-ion for the given peptide.</p>"
+      },
+      {
+        "question": "What does the term “counter-ion” mean as it relates to your beta-amyloid products?”",
+        "answer": "<p>The term “counter-ion” refers to the solution that the product was in prior to lyophilization before being supplied to our customers.</p>"
+      },
+      {
+        "question": "What are the storage conditions of your beta-amyloid preformed fibrils? How stable are they?",
+        "answer": "<p>We recommend storing the fibrils at -80°C and avoiding any freeze-thaw cycles on the product. The fibrils are supplied in a liquid solution rather than lyophilized powder, which makes them more suitable for colder temperatures.</p>"
+      },
+      {
+        "question": "I accidentally stored the beta-amyloid preformed fibrils improperly and the product has thawed, can I still use it?",
+        "answer": "<p>Since the beta-amyloid preformed fibrils are supplied as a liquid solution and should be stored at -80°C, the fibrils may no longer be good to use after being left thawed for more than 24 hours.</p>"
+      }
+    ]
+  },
+  {
+    "category": "Taus",
+    "id": "taus",
+    "items": [
+      {
+        "question": "What is your quality control for the Tau proteins?",
+        "answer": "<p>Our Tau products are analyzed on SDS-PAGE gels only. No mass spec is performed.</p>"
+      },
+      {
+        "question": "How can your Tau products be used?",
+        "answer": "<p>Our Tau proteins are suitable for various in vitro and in vivo experiments including: seeding studies, assay development, aggregation studies, cell-based experiments, and many more. Our products are not for human use, they are for research purposes only.</p>"
+      },
+      {
+        "question": "What are the storage conditions of your recombinant Tau products? How stable are they?",
+        "answer": "<p>Prior to reconstitution, products may be stored for up to 2-3 years between -20 and -80°C. After reconstitution in water, it is best to make working aliquots (AVOID FREEZE THAW) and store at -70°C and -80°C. This should be stable for about 1-2 weeks. For longer term, lyophilize aliquots.</p>"
+      },
+      {
+        "question": "What Tau products do you offer?",
+        "answer": "<p>We offer the six major isoforms of Tau, including the full length 441, 412, 410, 383, 381, and 352. We also offer several mutations of Tau 441 in addition to preformed fibrils and FITC or isotopically labeled proteins.</p>"
+      },
+      {
+        "question": "Are your Tau proteins phosphorylated?",
+        "answer": "<p>Unless otherwise stated on the datasheet, our Tau proteins are not phosphorylated.</p>"
+      },
+      {
+        "question": "I have tested the concentration of the product in the vial after reconstitution, and I am receiving a different result. Can you please explain why there is such a big difference?",
+        "answer": "<p>We recommend that our customers quantitate their tau samples using the Bio-Rad RC/DC assay, as this assay desalts the protein and therefore prevents any potential interference from buffer components. If you are experiencing challenges with reconstitution of the entire product, a brief sonication and centrifuge step is recommended.</p>"
+      },
+      {
+        "question": "What is the solubility of your tau proteins?",
+        "answer": "<p>Our tau proteins were lyophilized in an MES buffer and are soluble in ultra pure water. We recommend reconsituting the product at a concentration of .1mg/ml to 1mg/ml. Afterward, a brief sonication and centrifugation step is also recommended to ensure full reconstitution.</p>"
+      },
+      {
+        "question": "When you state that your Tau proteins are >90% pure, what contaminants make up the other 10%?",
+        "answer": "<p>While do guarantee a minimum purity of 90% on our tau proteins, our final batches are often much higher in purity due to the effective proprietary methods we use for purification.</p>"
+      },
+      {
+        "question": "What are the storage conditions of your tau preformed fibrils? How stable are they?",
+        "answer": "<p>We recommend storing the fibrils at -80°C and avoiding any freeze-thaw cycles on the product. The fibrils are supplied in a liquid solution rather than lyophilized powder, which makes them more suitable for colder temperatures.</p>"
+      },
+      {
+        "question": "I accidentally stored the tau preformed fibrils improperly and the product has thawed, can I still use it?",
+        "answer": "<p>Since the tau preformed fibrils are supplied as a liquid solution and should be stored at -80°C, the fibrils may no longer be good to use after being left thawed for more than 24 hours.</p>"
+      }
+    ]
+  },
+  {
+    "category": "Synucleins",
+    "id": "synucleins",
+    "items": [
+      {
+        "question": "How can your Synucleins be used?",
+        "answer": "<p>Our synucleins are suitable for various in vitro and in vivo experiments including: seeding studies, assay development, aggregation studies, cell-based experiments, and many more. Our products are not for human use, they are for research purposes only.</p>"
+      },
+      {
+        "question": "What are the storage conditions of your lyophilized synuclein products? How stable are they?",
+        "answer": "<p>Prior to reconstitution, products may be stored for up to 2-3 years between -20 and -80°C. After reconstitution in water, it is best to make working aliquots (AVOID FREEZE THAW) and store at -70°C and -80°C. This should be stable for about 1-2 weeks. For longer term, lyophilize aliquots.</p>"
+      },
+      {
+        "question": "What are the storage conditions of your synuclein preformed fibrils? How stable are they?",
+        "answer": "<p>We recommend storing the fibrils at -80°C and avoiding any freeze-thaw cycles on the product. The fibrils are supplied in a liquid solution rather than lyophilized powder, which makes them more suitable for colder temperatures.</p>"
+      },
+      {
+        "question": "I accidentally stored the synuclein preformed fibrils improperly and the product has thawed, can I still use it?",
+        "answer": "<p>Since the synuclein preformed fibrils are supplied as a liquid solution and should be stored at -80°C, the fibrils may no longer be good to use after being left thawed for more than 24 hours.</p>"
+      },
+      {
+        "question": "Is the Wild Type Alpha-Synuclein full length? Are there any modifications?",
+        "answer": "<p>The Alpha-Synuclein WT is full length and has no modifications.</p>"
+      },
+      {
+        "question": "What other synuclein products do you offer apart from the wild type Alpha-Synuclein?",
+        "answer": "<p>rPeptide offers a wide selection of synuclein products to fit all of our customers&#8217; needs. These products range from mutants, fragments, fibrils, and labeled products.</p>"
+      },
+      {
+        "question": "Can you tell me the detected endotoxin levels in the synuclein product I purchased?",
+        "answer": "<p>Testing for endoxotin is not currently a part of our QC for synuclein products. While our purification methods are designed to remove contaminants including endotoxin from the protein, we cannot guarantee a specific level as we do not assay for it.</p>"
+      }
+    ]
+  },
+  {
+    "category": "Fibrils",
+    "id": "fibrils",
+    "items": [
+      {
+        "question": "What are the storage conditions of your preformed fibrils? How stable are they?",
+        "answer": "<p>We recommend storing the fibrils at -80°C and avoiding any freeze-thaw cycles on the product. The fibrils are supplied in a liquid solution rather than lyophilized powder, which makes them more suitable for colder temperatures.</p>"
+      },
+      {
+        "question": "How are your preformed fibrils shipped?",
+        "answer": "<p>To maintain the integrity of the product, it will ship on dry ice. Additional charges will apply for dry ice shipments.</p>"
+      },
+      {
+        "question": "I accidentally stored the preformed fibrils improperly and the product has thawed, can I still use it?",
+        "answer": "<p>Since the preformed fibrils are supplied as a liquid solution and should be stored at -80°C, the fibrils may no longer be good to use after being left thawed for more than 24 hours.</p>"
+      },
+      {
+        "question": "I purchased your preformed fibrils and was looking for the molecular weight of the product on the COA, but I could only find the estimated size. Could you tell me the molecular weight of the preformed fibrils I purchased?",
+        "answer": "<p>We do not measure the molecular weight of the fibrils themselves but the weight of the monomer used to create the fibrils instead. The fibrils are measured by size (length) in nanometers, according to transmission electron microscopy, rather than mass.</p>"
+      },
+      {
+        "question": "Do you recommend sonication of your preformed fibrils before use in cell culture experiments or other experiments? If so, how long would you recommend we sonicate them for? We noticed some publications recommend these steps.",
+        "answer": "<p>We do not sonicate the fibrils prior to shipment. It is often reported in the literature that larger fibrils such as ours can be sonicated in order to provide smaller, more toxic fibrils for further experimentation. We do not have a recommended protocol for the sonication of fibrils, and we would instead suggest following any protocol you may have or design one from published works.</p>"
+      }
+    ]
+  }
+]
