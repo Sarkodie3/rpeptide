@@ -87,10 +87,8 @@ export default function OurCompanyPage() {
             Watkinsville, GA 30677, USA
           </p>
           <p>
-            Phone: 678.753.0747<br />
-            Toll Free: 866.753.0747<br />
-            Fax: 678.753.0746<br />
-            E-mail: <a href="mailto:sales@rpeptide.com" className="text-brand-blue underline">sales@rpeptide.com</a>
+            Phone: <a href="tel:+3122862032" className="text-brand-blue">+3122862032</a><br />
+            E-mail: <a href="mailto:Rpeptidessupport@gmail.com" className="text-brand-blue underline">Rpeptidessupport@gmail.com</a>
           </p>
           <p>
             <strong>Office Hours</strong><br />

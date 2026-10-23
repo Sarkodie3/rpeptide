@@ -3,10 +3,57 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { CreditCard, FileText, CheckCircle, ShieldCheck, ArrowRight } from 'lucide-react';
+import {
+  CheckCircle,
+  ShieldCheck,
+  ArrowRight,
+  Copy,
+  Check,
+  Coins,
+  Smartphone,
+  DollarSign,
+  AlertCircle
+} from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
 import { Order } from '@/types';
+
+type PaymentMethodType = 'crypto' | 'cashapp' | 'applepay';
+type CryptoType = 'BTC' | 'ETH' | 'USDT';
+
+interface CryptoWalletInfo {
+  name: string;
+  network: string;
+  address: string;
+  exchangeRate: number; // USD per coin
+  symbol: string;
+}
+
+const CRYPTO_WALLETS: Record<CryptoType, CryptoWalletInfo> = {
+  BTC: {
+    name: 'Bitcoin',
+    network: 'Bitcoin Native SegWit',
+    address: 'bc1q9v8y5ywnw6897z55g4v7jex9a89wq4z9x7l6e2',
+    exchangeRate: 67500,
+    symbol: 'BTC',
+  },
+  ETH: {
+    name: 'Ethereum',
+    network: 'Ethereum (ERC-20)',
+    address: '0x71C83D4829392eFE4249a8B89C33887198aB1556',
+    exchangeRate: 3500,
+    symbol: 'ETH',
+  },
+  USDT: {
+    name: 'Tether USDT',
+    network: 'TRC-20 (Tron)',
+    address: 'TYDhs8Pq65eK9b2uQW3t5N1Z8mF4yA3vB8',
+    exchangeRate: 1,
+    symbol: 'USDT',
+  },
+};
+
+const CASHAPP_TAG = '$RPeptideOrders';
 
 export default function CheckoutPage() {
   const { items, subtotal, discount, shipping, tax, total, clearCart } = useCart();
@@ -25,16 +72,17 @@ export default function CheckoutPage() {
     phone: user?.phone || '',
     email: user?.email || '',
     orderNotes: '',
-    paymentMethod: 'cc',
-    poNumber: '',
-    cardNumber: '•••• •••• •••• 4242',
-    cardExp: '12/28',
-    cardCvc: '•••',
+    paymentMethod: 'crypto' as PaymentMethodType,
+    cryptoCoin: 'BTC' as CryptoType,
+    cryptoTxid: '',
+    cashAppTag: '',
+    applePayPhone: '',
     termsAccepted: false,
   });
 
   const [orderComplete, setOrderComplete] = useState<Order | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -44,6 +92,12 @@ export default function CheckoutPage() {
     } else {
       setFormData(prev => ({ ...prev, [name]: value }));
     }
+  };
+
+  const copyToClipboard = (text: string, key: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedKey(key);
+    setTimeout(() => setCopiedKey(null), 2500);
   };
 
   const handleSubmitOrder = (e: React.FormEvent) => {
@@ -57,6 +111,16 @@ export default function CheckoutPage() {
 
     setTimeout(() => {
       const orderNum = 'RP-' + Math.floor(100000 + Math.random() * 900000);
+
+      let paymentMethodDisplay = 'CRYPTO';
+      if (formData.paymentMethod === 'crypto') {
+        paymentMethodDisplay = `CRYPTO (${formData.cryptoCoin}${formData.cryptoTxid ? ` - TXID: ${formData.cryptoTxid.slice(0, 10)}...` : ''})`;
+      } else if (formData.paymentMethod === 'cashapp') {
+        paymentMethodDisplay = `CASHAPP (${formData.cashAppTag ? formData.cashAppTag : CASHAPP_TAG})`;
+      } else if (formData.paymentMethod === 'applepay') {
+        paymentMethodDisplay = `APPLE PAY (${formData.applePayPhone ? formData.applePayPhone : 'Mobile / Touch ID'})`;
+      }
+
       const newOrder: Order = {
         id: 'ord_' + Date.now(),
         orderNumber: orderNum,
@@ -86,7 +150,7 @@ export default function CheckoutPage() {
           zip: formData.zip,
           country: formData.country,
         },
-        paymentMethod: formData.paymentMethod === 'cc' ? 'Credit Card' : `Institutional PO (${formData.poNumber || 'Pending'})`,
+        paymentMethod: paymentMethodDisplay,
       };
 
       addOrder(newOrder);
@@ -105,7 +169,7 @@ export default function CheckoutPage() {
             Thank You for Your Order!
           </h1>
           <p className="text-gray-600 text-sm mb-6">
-            Your order has been received and is currently being processed by the rPeptide fulfillment laboratory.
+            Your order has been recorded and is currently being prepared for dispatch by the rPeptide laboratory.
           </p>
 
           <div className="bg-gray-50 p-6 border border-gray-200 text-left text-sm space-y-3 mb-8">
@@ -121,9 +185,26 @@ export default function CheckoutPage() {
               <span className="text-gray-500">Total:</span>
               <span className="font-bold text-brand-blue text-base">${orderComplete.total.toFixed(2)}</span>
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between border-b pb-2">
               <span className="text-gray-500">Payment Method:</span>
-              <span className="font-semibold">{orderComplete.paymentMethod}</span>
+              <span className="font-semibold text-brand-charcoal">{orderComplete.paymentMethod}</span>
+            </div>
+            <div className="pt-2 text-xs text-gray-600 leading-relaxed">
+              {orderComplete.paymentMethod.startsWith('CRYPTO') && (
+                <p>
+                  <strong>Next step:</strong> Please ensure your cryptocurrency transfer of the total has been sent. Once confirmed on the blockchain, your tracking number will be emailed to your address.
+                </p>
+              )}
+              {orderComplete.paymentMethod.startsWith('CASHAPP') && (
+                <p>
+                  <strong>Next step:</strong> Send <strong>${orderComplete.total.toFixed(2)}</strong> via Cash App to <strong>{CASHAPP_TAG}</strong> with your Order Number <strong>{orderComplete.orderNumber}</strong> in the memo note.
+                </p>
+              )}
+              {orderComplete.paymentMethod.startsWith('APPLE PAY') && (
+                <p>
+                  <strong>Next step:</strong> An Apple Pay authorization confirmation has been prepared for your device. Support is available at <strong>+3122862032</strong> or <strong>Rpeptidessupport@gmail.com</strong>.
+                </p>
+              )}
             </div>
           </div>
 
@@ -158,6 +239,9 @@ export default function CheckoutPage() {
     );
   }
 
+  const activeWallet = CRYPTO_WALLETS[formData.cryptoCoin];
+  const cryptoAmount = (total / activeWallet.exchangeRate).toFixed(activeWallet.symbol === 'BTC' ? 6 : activeWallet.symbol === 'ETH' ? 5 : 2);
+
   return (
     <div className="site-container py-12">
       <div className="before-palace-order text-xs sm:text-sm mb-8">
@@ -183,6 +267,7 @@ export default function CheckoutPage() {
                   type="text"
                   name="firstName"
                   required
+                  placeholder="John"
                   value={formData.firstName}
                   onChange={handleInputChange}
                   className="w-full border border-gray-300 p-2.5 text-sm focus:outline-none focus:border-brand-blue"
@@ -197,6 +282,7 @@ export default function CheckoutPage() {
                   type="text"
                   name="lastName"
                   required
+                  placeholder="Doe"
                   value={formData.lastName}
                   onChange={handleInputChange}
                   className="w-full border border-gray-300 p-2.5 text-sm focus:outline-none focus:border-brand-blue"
@@ -234,6 +320,7 @@ export default function CheckoutPage() {
                   <option value="Germany">Germany</option>
                   <option value="Japan">Japan</option>
                   <option value="Switzerland">Switzerland</option>
+                  <option value="Australia">Australia</option>
                 </select>
               </div>
 
@@ -302,6 +389,7 @@ export default function CheckoutPage() {
                   type="tel"
                   name="phone"
                   required
+                  placeholder="+1 (555) 000-0000"
                   value={formData.phone}
                   onChange={handleInputChange}
                   className="w-full border border-gray-300 p-2.5 text-sm focus:outline-none focus:border-brand-blue"
@@ -316,6 +404,7 @@ export default function CheckoutPage() {
                   type="email"
                   name="email"
                   required
+                  placeholder="client@university.edu"
                   value={formData.email}
                   onChange={handleInputChange}
                   className="w-full border border-gray-300 p-2.5 text-sm focus:outline-none focus:border-brand-blue"
@@ -339,7 +428,7 @@ export default function CheckoutPage() {
           </div>
         </div>
 
-        {/* Right: Order Review & Payment */}
+        {/* Right: Order Review & Payment Methods */}
         <div className="lg:col-span-5 space-y-6">
           <div className="bg-[#f8f9fa] border border-gray-200 p-6">
             <h3 className="font-bold text-lg text-brand-charcoal border-b pb-3 mb-4">
@@ -394,76 +483,227 @@ export default function CheckoutPage() {
             {/* Payment Method Selector */}
             <div className="py-4 space-y-3">
               <label className="text-xs font-bold uppercase tracking-wider block text-brand-charcoal">
-                Payment Method
+                Select Payment Method
               </label>
 
-              <div className="space-y-2">
-                <label className="flex items-center gap-3 p-3 border bg-white cursor-pointer hover:border-brand-blue">
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="cc"
-                    checked={formData.paymentMethod === 'cc'}
-                    onChange={handleInputChange}
-                    className="text-brand-blue"
-                  />
-                  <CreditCard className="w-4 h-4 text-brand-blue" />
-                  <span className="text-xs font-semibold">Credit Card / Corporate Card</span>
-                </label>
-
-                {formData.paymentMethod === 'cc' && (
-                  <div className="p-3 bg-gray-100 border text-xs space-y-2">
-                    <input
-                      type="text"
-                      placeholder="Card Number"
-                      value={formData.cardNumber}
-                      onChange={(e) => setFormData(p => ({ ...p, cardNumber: e.target.value }))}
-                      className="w-full border p-2 bg-white"
-                    />
-                    <div className="grid grid-cols-2 gap-2">
+              <div className="space-y-3">
+                {/* 1. CRYPTO */}
+                <div className={`border transition-all ${formData.paymentMethod === 'crypto' ? 'border-brand-blue bg-blue-50/20 shadow-sm' : 'border-gray-200 bg-white'}`}>
+                  <label className="flex items-center justify-between p-3.5 cursor-pointer">
+                    <div className="flex items-center gap-3">
                       <input
-                        type="text"
-                        placeholder="MM/YY"
-                        value={formData.cardExp}
-                        onChange={(e) => setFormData(p => ({ ...p, cardExp: e.target.value }))}
-                        className="w-full border p-2 bg-white"
+                        type="radio"
+                        name="paymentMethod"
+                        value="crypto"
+                        checked={formData.paymentMethod === 'crypto'}
+                        onChange={handleInputChange}
+                        className="text-brand-blue"
                       />
-                      <input
-                        type="text"
-                        placeholder="CVC"
-                        value={formData.cardCvc}
-                        onChange={(e) => setFormData(p => ({ ...p, cardCvc: e.target.value }))}
-                        className="w-full border p-2 bg-white"
-                      />
+                      <div className="flex items-center gap-2">
+                        <Coins className="w-5 h-5 text-amber-600" />
+                        <span className="font-bold text-sm text-brand-charcoal">CRYPTO</span>
+                      </div>
                     </div>
-                  </div>
-                )}
+                    <span className="text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-800 px-2 py-0.5 rounded">
+                      BTC / ETH / USDT
+                    </span>
+                  </label>
 
-                <label className="flex items-center gap-3 p-3 border bg-white cursor-pointer hover:border-brand-blue">
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="po"
-                    checked={formData.paymentMethod === 'po'}
-                    onChange={handleInputChange}
-                    className="text-brand-blue"
-                  />
-                  <FileText className="w-4 h-4 text-brand-blue" />
-                  <span className="text-xs font-semibold">Institutional Purchase Order (PO)</span>
-                </label>
+                  {formData.paymentMethod === 'crypto' && (
+                    <div className="p-4 bg-gray-50 border-t border-gray-200 text-xs space-y-3">
+                      <div>
+                        <span className="font-semibold text-gray-700 block mb-1.5">Choose Coin:</span>
+                        <div className="grid grid-cols-3 gap-2">
+                          {(['BTC', 'ETH', 'USDT'] as CryptoType[]).map(coin => (
+                            <button
+                              key={coin}
+                              type="button"
+                              onClick={() => setFormData(p => ({ ...p, cryptoCoin: coin }))}
+                              className={`py-2 px-2 text-center font-bold text-xs border rounded transition-colors ${
+                                formData.cryptoCoin === coin
+                                  ? 'bg-brand-blue text-white border-brand-blue'
+                                  : 'bg-white text-gray-700 border-gray-300 hover:border-gray-400'
+                              }`}
+                            >
+                              {coin}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
 
-                {formData.paymentMethod === 'po' && (
-                  <div className="p-3 bg-gray-100 border text-xs space-y-2">
-                    <p className="text-gray-600">Enter your institution&rsquo;s PO reference number for NET 30 invoicing:</p>
-                    <input
-                      type="text"
-                      placeholder="PO Number (e.g. PO-89211)"
-                      value={formData.poNumber}
-                      onChange={(e) => setFormData(p => ({ ...p, poNumber: e.target.value }))}
-                      className="w-full border p-2 bg-white"
-                    />
-                  </div>
-                )}
+                      <div className="p-3 bg-white border border-gray-200 rounded space-y-2">
+                        <div className="flex justify-between items-center text-[11px] text-gray-500">
+                          <span>Network: <strong className="text-gray-800">{activeWallet.network}</strong></span>
+                          <span>Amount: <strong className="text-brand-blue font-mono">{cryptoAmount} {activeWallet.symbol}</strong></span>
+                        </div>
+
+                        <div>
+                          <span className="text-[11px] font-semibold text-gray-600 block mb-1">
+                            Deposit Wallet Address:
+                          </span>
+                          <div className="flex items-center bg-gray-100 p-2 rounded border border-gray-200 gap-2">
+                            <span className="font-mono text-[11px] text-gray-800 break-all flex-grow select-all">
+                              {activeWallet.address}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => copyToClipboard(activeWallet.address, 'crypto')}
+                              className="bg-white hover:bg-gray-200 border px-2.5 py-1 text-[11px] font-semibold rounded flex items-center gap-1 flex-shrink-0"
+                            >
+                              {copiedKey === 'crypto' ? (
+                                <>
+                                  <Check className="w-3 h-3 text-green-600" />
+                                  <span className="text-green-700">Copied</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Copy className="w-3 h-3 text-gray-500" />
+                                  <span>Copy</span>
+                                </>
+                              )}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-[11px] font-semibold text-gray-700 mb-1">
+                          Transaction Hash / TXID (Optional for faster release)
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Paste blockchain transaction hash..."
+                          value={formData.cryptoTxid}
+                          onChange={(e) => setFormData(p => ({ ...p, cryptoTxid: e.target.value }))}
+                          className="w-full border border-gray-300 p-2 text-xs bg-white focus:outline-none focus:border-brand-blue"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* 2. CASHAPP */}
+                <div className={`border transition-all ${formData.paymentMethod === 'cashapp' ? 'border-brand-blue bg-blue-50/20 shadow-sm' : 'border-gray-200 bg-white'}`}>
+                  <label className="flex items-center justify-between p-3.5 cursor-pointer">
+                    <div className="flex items-center gap-3">
+                      <input
+                        type="radio"
+                        name="paymentMethod"
+                        value="cashapp"
+                        checked={formData.paymentMethod === 'cashapp'}
+                        onChange={handleInputChange}
+                        className="text-brand-blue"
+                      />
+                      <div className="flex items-center gap-2">
+                        <div className="w-5 h-5 bg-[#00D632] rounded-full flex items-center justify-center text-white font-bold text-xs">
+                          $
+                        </div>
+                        <span className="font-bold text-sm text-brand-charcoal">CASHAPP</span>
+                      </div>
+                    </div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider bg-green-100 text-green-800 px-2 py-0.5 rounded">
+                      Instant Mobile Pay
+                    </span>
+                  </label>
+
+                  {formData.paymentMethod === 'cashapp' && (
+                    <div className="p-4 bg-gray-50 border-t border-gray-200 text-xs space-y-3">
+                      <div className="p-3 bg-white border border-gray-200 rounded space-y-2">
+                        <div className="flex justify-between items-center">
+                          <span className="text-gray-600">Send Payment To:</span>
+                          <span className="font-bold text-sm text-brand-blue">{CASHAPP_TAG}</span>
+                        </div>
+                        <div className="flex items-center justify-between bg-gray-100 p-2 rounded text-xs">
+                          <span className="font-mono text-gray-800">Cashtag: <strong>{CASHAPP_TAG}</strong></span>
+                          <button
+                            type="button"
+                            onClick={() => copyToClipboard(CASHAPP_TAG, 'cashapp')}
+                            className="bg-white hover:bg-gray-200 border px-2.5 py-1 text-[11px] font-semibold rounded flex items-center gap-1"
+                          >
+                            {copiedKey === 'cashapp' ? (
+                              <>
+                                <Check className="w-3 h-3 text-green-600" />
+                                <span className="text-green-700">Copied</span>
+                              </>
+                            ) : (
+                              <>
+                                <Copy className="w-3 h-3 text-gray-500" />
+                                <span>Copy</span>
+                              </>
+                            )}
+                          </button>
+                        </div>
+                        <div className="text-[11px] text-gray-500 leading-relaxed pt-1">
+                          1. Open Cash App on your device.<br />
+                          2. Send <strong>${total.toFixed(2)}</strong> to <strong>{CASHAPP_TAG}</strong>.<br />
+                          3. In the memo / note field, enter your name: <strong>{formData.firstName || 'Client'} - Order</strong>.
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-[11px] font-semibold text-gray-700 mb-1">
+                          Your $Cashtag (for verification)
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="$YourUsername"
+                          value={formData.cashAppTag}
+                          onChange={(e) => setFormData(p => ({ ...p, cashAppTag: e.target.value }))}
+                          className="w-full border border-gray-300 p-2 text-xs bg-white focus:outline-none focus:border-brand-blue"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* 3. APPLE PAY */}
+                <div className={`border transition-all ${formData.paymentMethod === 'applepay' ? 'border-brand-blue bg-blue-50/20 shadow-sm' : 'border-gray-200 bg-white'}`}>
+                  <label className="flex items-center justify-between p-3.5 cursor-pointer">
+                    <div className="flex items-center gap-3">
+                      <input
+                        type="radio"
+                        name="paymentMethod"
+                        value="applepay"
+                        checked={formData.paymentMethod === 'applepay'}
+                        onChange={handleInputChange}
+                        className="text-brand-blue"
+                      />
+                      <div className="flex items-center gap-2">
+                        <Smartphone className="w-5 h-5 text-gray-800" />
+                        <span className="font-bold text-sm text-brand-charcoal">APPLE PAY</span>
+                      </div>
+                    </div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider bg-black text-white px-2.5 py-0.5 rounded">
+                      Apple Pay
+                    </span>
+                  </label>
+
+                  {formData.paymentMethod === 'applepay' && (
+                    <div className="p-4 bg-gray-50 border-t border-gray-200 text-xs space-y-3">
+                      <div className="p-3 bg-white border border-gray-200 rounded space-y-2 text-center">
+                        <div className="inline-flex items-center justify-center bg-black text-white px-4 py-2 rounded font-semibold text-sm gap-2 mx-auto">
+                          <span>Pay with Apple Pay</span>
+                        </div>
+                        <p className="text-[11px] text-gray-600 leading-relaxed pt-1">
+                          When you submit this order, you will be prompted on your Apple device or Safari browser to confirm with Touch ID, Face ID, or passcode.
+                        </p>
+                      </div>
+
+                      <div>
+                        <label className="block text-[11px] font-semibold text-gray-700 mb-1">
+                          Apple Pay Contact Phone / Apple ID
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="+1 (555) 000-0000 or appleid@icloud.com"
+                          value={formData.applePayPhone}
+                          onChange={(e) => setFormData(p => ({ ...p, applePayPhone: e.target.value }))}
+                          className="w-full border border-gray-300 p-2 text-xs bg-white focus:outline-none focus:border-brand-blue"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -490,10 +730,12 @@ export default function CheckoutPage() {
               className="w-full btn-primary text-xs uppercase tracking-wider py-4 font-bold flex items-center justify-center gap-2"
             >
               {submitting ? (
-                <span>Processing Order...</span>
+                <span>Authorizing Order...</span>
               ) : (
                 <>
-                  <span>Place Order</span>
+                  <span>
+                    Place Order &bull; Pay with {formData.paymentMethod === 'crypto' ? 'Crypto' : formData.paymentMethod === 'cashapp' ? 'Cash App' : 'Apple Pay'}
+                  </span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}
@@ -501,7 +743,7 @@ export default function CheckoutPage() {
 
             <div className="flex items-center justify-center gap-2 text-xs text-gray-500 mt-4">
               <ShieldCheck className="w-4 h-4 text-green-600" />
-              <span>256-Bit SSL Encrypted Checkout</span>
+              <span>256-Bit SSL Encrypted Checkout &bull; Verified Gateway</span>
             </div>
           </div>
         </div>

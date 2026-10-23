@@ -180,7 +180,7 @@ export default function InternationalDistributorsPage() {
             rPeptide ships directly to universities and laboratories worldwide via FedEx Priority International Cold-Chain.
           </p>
           <p>
-            Contact <a href="mailto:sales@rpeptide.com" className="text-brand-blue underline font-semibold">sales@rpeptide.com</a> for international shipping rates.
+            Contact <a href="mailto:Rpeptidessupport@gmail.com" className="text-brand-blue underline font-semibold">Rpeptidessupport@gmail.com</a> or call <a href="tel:+3122862032" className="text-brand-blue font-semibold">+3122862032</a> for international shipping rates.
           </p>
         </div>
       </div>

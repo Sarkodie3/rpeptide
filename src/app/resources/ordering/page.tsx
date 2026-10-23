@@ -67,9 +67,8 @@ export default function OrderingOverviewPage() {
             <FileText className="w-8 h-8 text-brand-blue mb-3" />
             <h3 className="font-bold text-base text-brand-charcoal mb-2">2. Institutional Purchase Orders</h3>
             <p className="text-xs text-gray-600 leading-relaxed mb-4">
-              Universities, research hospitals, and approved corporate labs can purchase using standard purchase orders with NET 30 payment terms. Send your PO to <a href="mailto:sales@rpeptide.com" className="text-brand-blue underline">sales@rpeptide.com</a>.
+              Universities, research hospitals, and approved corporate labs can purchase using standard purchase orders with NET 30 payment terms. Send your PO to <a href="mailto:Rpeptidessupport@gmail.com" className="text-brand-blue underline">Rpeptidessupport@gmail.com</a> or call <a href="tel:+3122862032" className="text-brand-blue font-semibold">+3122862032</a>.
             </p>
-            <span className="text-xs font-bold text-brand-charcoal">PO Fax: 678.753.0746</span>
           </div>
         </div>
 

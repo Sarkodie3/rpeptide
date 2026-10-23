@@ -97,10 +97,10 @@ export default function ContractServicesPage() {
               Request Custom Quote Online
             </Link>
             <a
-              href="mailto:sales@rpeptide.com?subject=Custom%20Product%20Quote%20Request"
+              href="mailto:Rpeptidessupport@gmail.com?subject=Custom%20Product%20Quote%20Request"
               className="btn-hollow text-xs uppercase tracking-wider py-3 px-6"
             >
-              Email sales@rpeptide.com
+              Email Rpeptidessupport@gmail.com
             </a>
           </div>
 

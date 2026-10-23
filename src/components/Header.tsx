@@ -497,8 +497,8 @@ export default function Header() {
             {/* Bottom Contact Phone */}
             <div className="pt-6 border-t text-xs text-gray-500">
               <p className="font-semibold text-brand-charcoal">rPeptide Technical Support</p>
-              <p>Phone: 866.753.0747</p>
-              <p>Email: sales@rpeptide.com</p>
+              <p>Phone: +3122862032</p>
+              <p>Email: Rpeptidessupport@gmail.com</p>
             </div>
           </div>
         </div>

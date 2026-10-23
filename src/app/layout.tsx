@@ -32,10 +32,10 @@ export default function RootLayout({
     name: 'rPeptide',
     url: 'https://www.rpeptide.com',
     logo: 'https://www.rpeptide.com/wp-content/themes/rpeptide-aktivstudios/assets/images/logo-rpeptide.png',
-    telephone: '866.753.0747',
+    telephone: '+3122862032',
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: '866.753.0747',
+      telephone: '+3122862032',
       contactType: 'Customer Service',
       areaServed: 'US',
       availableLanguage: 'English',

@@ -257,7 +257,7 @@ export default function MyAccountPage() {
                 <input type="checkbox" className="text-brand-blue" defaultChecked />
                 <span>Remember me</span>
               </label>
-              <a href="#" onClick={(e) => { e.preventDefault(); alert('Please contact sales@rpeptide.com for password resets.'); }} className="text-brand-blue hover:underline">
+              <a href="#" onClick={(e) => { e.preventDefault(); alert('Please contact Rpeptidessupport@gmail.com for password resets.'); }} className="text-brand-blue hover:underline">
                 Lost password?
               </a>
             </div>

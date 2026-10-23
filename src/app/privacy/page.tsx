@@ -31,7 +31,7 @@ export default function PrivacyPolicyPage() {
       </p>
 
       <div className="pt-6 border-t text-xs text-gray-500">
-        <p>If you have questions regarding our privacy practices, please contact <a href="mailto:sales@rpeptide.com" className="text-brand-blue underline">sales@rpeptide.com</a>.</p>
+        <p>If you have questions regarding our privacy practices, please contact <a href="mailto:Rpeptidessupport@gmail.com" className="text-brand-blue underline">Rpeptidessupport@gmail.com</a>.</p>
       </div>
     </div>
   );

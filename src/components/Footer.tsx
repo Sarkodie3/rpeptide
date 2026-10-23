@@ -90,9 +90,8 @@ export default function Footer() {
               />
             </div>
             <address className="not-italic text-sm text-gray-300 space-y-1 mb-4">
-              <p><strong>ph:</strong> <a href="tel:8667530747" className="hover:text-brand-gold">866.753.0747</a></p>
-              <p><strong>fax:</strong> <a href="tel:6787530746" className="hover:text-brand-gold">678.753.0746</a></p>
-              <p><strong>e:</strong> <a href="mailto:sales@rpeptide.com" className="hover:text-brand-gold">sales@rpeptide.com</a></p>
+              <p><strong>ph:</strong> <a href="tel:+3122862032" className="hover:text-brand-gold">+3122862032</a></p>
+              <p><strong>e:</strong> <a href="mailto:Rpeptidessupport@gmail.com" className="hover:text-brand-gold">Rpeptidessupport@gmail.com</a></p>
             </address>
 
             <h5 className="text-white font-semibold text-xs uppercase tracking-wider mb-2">Follow Us</h5>

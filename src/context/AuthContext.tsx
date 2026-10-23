@@ -42,7 +42,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       firstName: 'Dr. Researcher',
       lastName: 'Client',
       company: 'Biotech Labs Inc.',
-      phone: '866-753-0747',
+      phone: '+3122862032',
       address: {
         street: '100 Research Parkway, Suite 200',
         city: 'Watkinsville',
