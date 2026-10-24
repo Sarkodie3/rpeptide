@@ -12,7 +12,9 @@ import {
   Coins,
   Smartphone,
   DollarSign,
-  AlertCircle
+  AlertCircle,
+  Mail,
+  Loader2
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
@@ -100,7 +102,7 @@ export default function CheckoutPage() {
     setTimeout(() => setCopiedKey(null), 2500);
   };
 
-  const handleSubmitOrder = (e: React.FormEvent) => {
+  const handleSubmitOrder = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.termsAccepted) {
       alert('Please agree to the research terms and conditions to proceed.');
@@ -109,58 +111,102 @@ export default function CheckoutPage() {
 
     setSubmitting(true);
 
-    setTimeout(() => {
-      const orderNum = 'RP-' + Math.floor(100000 + Math.random() * 900000);
+    const orderNum = 'RP-' + Math.floor(100000 + Math.random() * 900000);
 
-      let paymentMethodDisplay = 'CRYPTO';
-      if (formData.paymentMethod === 'crypto') {
-        paymentMethodDisplay = `CRYPTO (${formData.cryptoCoin}${formData.cryptoTxid ? ` - TXID: ${formData.cryptoTxid.slice(0, 10)}...` : ''})`;
-      } else if (formData.paymentMethod === 'cashapp') {
-        paymentMethodDisplay = `CASHAPP (${formData.cashAppTag ? formData.cashAppTag : CASHAPP_TAG})`;
-      } else if (formData.paymentMethod === 'applepay') {
-        paymentMethodDisplay = `APPLE PAY (${formData.applePayPhone ? formData.applePayPhone : 'Mobile / Touch ID'})`;
-      }
+    let paymentMethodDisplay = 'CRYPTO';
+    let paymentDetailsProvided = '';
+    if (formData.paymentMethod === 'crypto') {
+      paymentMethodDisplay = `CRYPTO (${formData.cryptoCoin}${formData.cryptoTxid ? ` - TXID: ${formData.cryptoTxid.slice(0, 10)}...` : ''})`;
+      paymentDetailsProvided = `Selected Coin: ${formData.cryptoCoin} (${CRYPTO_WALLETS[formData.cryptoCoin].name}). Network: ${CRYPTO_WALLETS[formData.cryptoCoin].network}. Customer TXID / Hash: ${formData.cryptoTxid || 'Awaiting wallet invoice from support'}`;
+    } else if (formData.paymentMethod === 'cashapp') {
+      paymentMethodDisplay = `CASHAPP (${formData.cashAppTag ? formData.cashAppTag : CASHAPP_TAG})`;
+      paymentDetailsProvided = `Customer Cashtag: ${formData.cashAppTag || 'Awaiting Cash App payment link from support'}. Store Cashtag: ${CASHAPP_TAG}`;
+    } else if (formData.paymentMethod === 'applepay') {
+      paymentMethodDisplay = `APPLE PAY (${formData.applePayPhone ? formData.applePayPhone : 'Mobile / Touch ID'})`;
+      paymentDetailsProvided = `Customer Apple Pay Contact: ${formData.applePayPhone || 'Device Touch/Face ID'}. Awaiting Apple Pay invoice from support`;
+    }
 
-      const newOrder: Order = {
-        id: 'ord_' + Date.now(),
-        orderNumber: orderNum,
-        date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
-        status: 'Processing',
-        items: [...items],
-        subtotal,
-        discount,
-        tax,
-        shipping,
-        total,
-        billingAddress: {
-          name: `${formData.firstName} ${formData.lastName}`,
+    const newOrder: Order = {
+      id: 'ord_' + Date.now(),
+      orderNumber: orderNum,
+      date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+      status: 'Processing',
+      items: [...items],
+      subtotal,
+      discount,
+      tax,
+      shipping,
+      total,
+      billingAddress: {
+        name: `${formData.firstName} ${formData.lastName}`,
+        company: formData.company,
+        street: formData.street,
+        city: formData.city,
+        state: formData.state,
+        zip: formData.zip,
+        country: formData.country,
+      },
+      shippingAddress: {
+        name: `${formData.firstName} ${formData.lastName}`,
+        company: formData.company,
+        street: formData.street,
+        city: formData.city,
+        state: formData.state,
+        zip: formData.zip,
+        country: formData.country,
+      },
+      paymentMethod: paymentMethodDisplay,
+    };
+
+    // Forward complete order information directly to support email: Rpeptidessupport@gmail.com
+    try {
+      await fetch('/api/order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          orderNumber: orderNum,
+          customerName: `${formData.firstName} ${formData.lastName}`,
+          customerEmail: formData.email,
+          phone: formData.phone,
           company: formData.company,
           street: formData.street,
           city: formData.city,
           state: formData.state,
           zip: formData.zip,
           country: formData.country,
-        },
-        shippingAddress: {
-          name: `${formData.firstName} ${formData.lastName}`,
-          company: formData.company,
-          street: formData.street,
-          city: formData.city,
-          state: formData.state,
-          zip: formData.zip,
-          country: formData.country,
-        },
-        paymentMethod: paymentMethodDisplay,
-      };
+          shippingAddress: newOrder.shippingAddress,
+          paymentMethod: paymentMethodDisplay,
+          paymentDetails: paymentDetailsProvided,
+          items: items.map(item => ({
+            id: String(item.id),
+            name: item.name,
+            size: item.size || 'Standard',
+            price: item.price,
+            quantity: item.quantity,
+          })),
+          subtotal,
+          shipping,
+          tax,
+          total,
+          orderNotes: formData.orderNotes,
+        }),
+      });
+    } catch (err) {
+      console.error('Error dispatching order notification to support email:', err);
+    }
 
-      addOrder(newOrder);
-      clearCart();
-      setOrderComplete(newOrder);
-      setSubmitting(false);
-    }, 1200);
+    addOrder(newOrder);
+    clearCart();
+    setOrderComplete(newOrder);
+    setSubmitting(false);
   };
 
   if (orderComplete) {
+    const emailSubject = encodeURIComponent(`rPeptide Order Payment - ${orderComplete.orderNumber}`);
+    const emailBody = encodeURIComponent(
+      `Hello rPeptide Support Team,\n\nI just placed order ${orderComplete.orderNumber} on rPeptide.com for a total of $${orderComplete.total.toFixed(2)}.\n\nMy selected payment method is: ${orderComplete.paymentMethod}.\n\nPlease review my order and email me the payment instructions / custom invoice so I can complete payment.\n\nThank you!\n${orderComplete.billingAddress?.name || ''}`
+    );
+
     return (
       <div className="site-container py-16">
         <div className="max-w-2xl mx-auto bg-white border border-gray-200 p-8 text-center shadow-sm">
@@ -169,7 +215,7 @@ export default function CheckoutPage() {
             Thank You for Your Order!
           </h1>
           <p className="text-gray-600 text-sm mb-6">
-            Your order has been recorded and is currently being prepared for dispatch by the rPeptide laboratory.
+            Your order has been recorded and submitted for fulfillment review.
           </p>
 
           <div className="bg-gray-50 p-6 border border-gray-200 text-left text-sm space-y-3 mb-8">
@@ -186,25 +232,30 @@ export default function CheckoutPage() {
               <span className="font-bold text-brand-blue text-base">${orderComplete.total.toFixed(2)}</span>
             </div>
             <div className="flex justify-between border-b pb-2">
-              <span className="text-gray-500">Payment Method:</span>
+              <span className="text-gray-500">Selected Payment Method:</span>
               <span className="font-semibold text-brand-charcoal">{orderComplete.paymentMethod}</span>
             </div>
-            <div className="pt-2 text-xs text-gray-600 leading-relaxed">
-              {orderComplete.paymentMethod.startsWith('CRYPTO') && (
-                <p>
-                  <strong>Next step:</strong> Please ensure your cryptocurrency transfer of the total has been sent. Once confirmed on the blockchain, your tracking number will be emailed to your address.
-                </p>
-              )}
-              {orderComplete.paymentMethod.startsWith('CASHAPP') && (
-                <p>
-                  <strong>Next step:</strong> Send <strong>${orderComplete.total.toFixed(2)}</strong> via Cash App to <strong>{CASHAPP_TAG}</strong> with your Order Number <strong>{orderComplete.orderNumber}</strong> in the memo note.
-                </p>
-              )}
-              {orderComplete.paymentMethod.startsWith('APPLE PAY') && (
-                <p>
-                  <strong>Next step:</strong> An Apple Pay authorization confirmation has been prepared for your device. Support is available at <strong>+3122862032</strong> or <strong>Rpeptidessupport@gmail.com</strong>.
-                </p>
-              )}
+
+            <div className="pt-3 text-xs text-gray-700 leading-relaxed bg-blue-50 border border-blue-200 p-4 rounded space-y-2">
+              <p className="font-bold text-brand-blue flex items-center gap-1.5 text-sm">
+                <Mail className="w-4 h-4 text-brand-blue" />
+                <span>Next Step: Order Review &amp; Payment Details</span>
+              </p>
+              <p>
+                Your complete order details have been forwarded directly to our support desk at <strong className="text-brand-charcoal">Rpeptidessupport@gmail.com</strong>.
+              </p>
+              <p>
+                Our billing and lab team will review your order items and email you shortly at <strong className="text-brand-charcoal">{formData.email || 'your registered email'}</strong> with the official invoice and custom transfer instructions for your selected payment method (<strong>{orderComplete.paymentMethod}</strong>).
+              </p>
+              <div className="pt-2 border-t border-blue-200">
+                <a
+                  href={`mailto:Rpeptidessupport@gmail.com?subject=${emailSubject}&body=${emailBody}`}
+                  className="inline-flex items-center gap-1 text-xs font-bold text-brand-blue hover:text-brand-charcoal underline"
+                >
+                  <Mail className="w-3.5 h-3.5" />
+                  <span>Click here to email Rpeptidessupport@gmail.com directly about this order</span>
+                </a>
+              </div>
             </div>
           </div>
 
@@ -483,8 +534,11 @@ export default function CheckoutPage() {
             {/* Payment Method Selector */}
             <div className="py-4 space-y-3">
               <label className="text-xs font-bold uppercase tracking-wider block text-brand-charcoal">
-                Select Payment Method
+                Select Preferred Payment Method
               </label>
+              <p className="text-[11px] text-gray-500 leading-normal">
+                Select your preferred payment channel. Once you place the order, our order desk (<strong className="text-brand-charcoal">Rpeptidessupport@gmail.com</strong>) will receive your requisition and email you the payment details / invoice directly.
+              </p>
 
               <div className="space-y-3">
                 {/* 1. CRYPTO */}
@@ -730,11 +784,14 @@ export default function CheckoutPage() {
               className="w-full btn-primary text-xs uppercase tracking-wider py-4 font-bold flex items-center justify-center gap-2"
             >
               {submitting ? (
-                <span>Authorizing Order...</span>
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <span>Submitting Order to Support Desk...</span>
+                </>
               ) : (
                 <>
                   <span>
-                    Place Order &bull; Pay with {formData.paymentMethod === 'crypto' ? 'Crypto' : formData.paymentMethod === 'cashapp' ? 'Cash App' : 'Apple Pay'}
+                    Place Order &bull; Request {formData.paymentMethod === 'crypto' ? 'Crypto' : formData.paymentMethod === 'cashapp' ? 'Cash App' : 'Apple Pay'} Invoice
                   </span>
                   <ArrowRight className="w-4 h-4" />
                 </>

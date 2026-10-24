@@ -76,6 +76,8 @@ export async function POST(request: Request) {
           headers: {
             'Content-Type': 'application/json',
             Accept: 'application/json',
+            Referer: 'https://www.rpeptide.com',
+            Origin: 'https://www.rpeptide.com',
           },
           body: JSON.stringify({
             name,
@@ -86,6 +88,7 @@ export async function POST(request: Request) {
             message,
             _subject: `[rPeptide Inquiry/Complaint] ${subject} from ${name}`,
             _replyto: clientEmail,
+            _captcha: 'false',
             _template: 'table',
           }),
         });
